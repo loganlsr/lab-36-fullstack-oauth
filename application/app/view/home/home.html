@@ -1,0 +1,19 @@
+<main class="home">
+  <a ng-href="{{homeCtrl.googleAuthUrl}}"> Login with Google </a>
+  <h1> {{"hitting the home page" | toUpperCase}} </h1>
+  <nav class="gallery-list-container">
+    <h2> {{'hello world' | uppercase}} <h2>
+    <h3> {{ homeCtrl.today | date: 'short' }} </h3>
+    <input ng-model="homeCtrl.gallerySearchTerm" type="text" placeholder="search ... ">
+    <ul>
+      <gallery-li
+        ng-repeat=" item in homeCtrl.galleries | gallerySearch:homeCtrl.gallerySearchTerm"
+        ng-click="homeCtrl.currentGallery = item"
+        delete-done="homeCtrl.galleryDeleteDone(galleryData)"
+        gallery="item"> </gallery-li>
+    </ul>
+    <create-gallery></create-gallery>
+  </nav>
+
+  <thumbnail-container gallery="homeCtrl.currentGallery"> </thumbnail-container>
+</main>

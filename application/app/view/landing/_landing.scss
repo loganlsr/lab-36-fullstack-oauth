@@ -1,0 +1,48 @@
+@import  "theme";
+
+.landing {
+  background-color: #333;
+  .join-inner-container {
+    padding: 5%;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    width: 100%;
+    background-color: $app-success;
+    transition: 500ms;
+
+    button {
+      color: $app-secondary;
+    }
+
+    input {
+      margin-top: 2%;
+
+      &[type='submit'] {
+        color: $app-secondary;
+      }
+    }
+
+    p {
+      padding: 2%;
+      display: inline-block;
+      color: $app-white;
+    }
+
+    a {
+      display: inline-block;
+      font-size: 1.2em;
+      text-decoration: none;
+      color: $app-info;
+    }
+
+    @media (min-width: 400px) {
+      width: 90%;
+    }
+
+    @media (min-width: 1000px) {
+      width: 50%;
+    }
+  }
+}
