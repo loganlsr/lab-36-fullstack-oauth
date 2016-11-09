@@ -2,9 +2,9 @@
 
 require('./_home.scss');
 
-module.exports = ['$log', '$rootScope', 'galleryService', HomeController];
+module.exports = ['$log', '$rootScope', '$location', 'authService', 'galleryService', HomeController];
 
-function HomeController($log, $rootScope, galleryService){
+function HomeController($log, $rootScope, $location, authService, galleryService){
   $log.debug('init homeCtrl');
 
   this.today = new Date();
@@ -30,6 +30,24 @@ function HomeController($log, $rootScope, galleryService){
 
   $rootScope.$on('$locationChangeSuccess', () => {
     this.fetchGalleries();
+  });
+
+  let query = $location.search();
+  if (query.token){
+    authService.setToken(query.token)
+    .then(() => {
+      $location.path('/#/home');
+    });
+  }
+
+  $rootScope.$on('locationChangeSuccess', () => {
+    let query = $location.search();
+    if (query.token){
+      authService.setToken(query.token)
+      .then(() => {
+        $location.path('/#/home');
+      });
+    }
   });
 
   let googleAuthBase = 'https://accounts.google.com/o/oauth2/v2/auth';
